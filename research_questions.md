@@ -13,10 +13,10 @@ Taking an exploratory approach, we aim to propose a simplified representation of
 
 
 ## Aspects of the information to be collected
-* Continent of birth
+* Education (sociologists)
+* Person label
 * Gender
 * Birth date (for cohort analysis)
-* Education
-* Languages spoken, written, or signed
+* Continent of birth
 * Number of languages
     
