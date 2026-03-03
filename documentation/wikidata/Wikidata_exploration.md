@@ -194,6 +194,7 @@ WHERE
 }
 ````
 ### Number of individuals without English label
+
 347 individuals on 03 March, 2026
 ````
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -266,7 +267,7 @@ WHERE
 
 ### Outgoing
 
-Cf. [on this page](https://github.com/NicoSidler/python_best_practices/blob/40979b35ceaac57c1d47271af61e4fe3f45cd404/documentation/wikidata/wikidata_propertylist.csv)) the list of properties resulting from this query.
+On this page (Cf. [on this page](https://github.com/NicoSidler/python_best_practices/blob/40979b35ceaac57c1d47271af61e4fe3f45cd404/documentation/wikidata/wikidata_propertylist.csv)) find the list of properties resulting from this query.
 
 ````
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
@@ -323,41 +324,42 @@ In the column 'notes' of the property table you can add links to the pages where
 
 ### Incoming
 
-```
+````
+### Incoming (birth year 1950–1980, sociologists)
+
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX wikibase: <http://wikiba.se/ontology#>
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-SELECT ?p ?propLabel ?eff  ('' as ?notes)
+
+SELECT ?p ?propLabel ?eff ('' as ?notes)
 WHERE {
-{
-    SELECT DISTINCT  ?p  (count(*) as ?eff)
+  {
+    SELECT DISTINCT ?p (count(*) as ?eff)
     WHERE {
-        ?item wdt:P31 wd:Q5; 
-             wdt:P569 ?birthDate.
-        BIND(REPLACE(str(?birthDate), "(.*)([0-9]{4})(.*)", "$2") AS ?year)
-        FILTER(xsd:integer(?year) > 1780 && xsd:integer(?year) < 1981)# Any instance of a human.
-            {?item wdt:P106 wd:Q11063}
-            UNION
-            {?item wdt:P101 wd:Q333} 
-            UNION
-            {?item wdt:P106 wd:Q169470}
-            UNION
-            {?item wdt:P101 wd:Q413}.
+      ?item wdt:P31 wd:Q5;
+            wdt:P569 ?birthDate.
 
-            ## inversed triple
-			?s ?p ?item.
-        }
-		GROUP BY ?p
+      BIND(REPLACE(str(?birthDate), "(.*)([0-9]{4})(.*)", "$2") AS ?year)
+      FILTER(xsd:integer(?year) >= 1950 && xsd:integer(?year) <= 1980)
+
+      { ?item wdt:P106 wd:Q2306091 }
+      UNION
+      { ?item wdt:P101 wd:Q2306091 } .
+
+      ## inversed triple (incoming properties)
+      ?s ?p ?item .
     }
-    ?prop wikibase:directClaim ?p .
+    GROUP BY ?p
+  }
 
-    ?prop rdfs:label ?propLabel.
-        FILTER(LANG(?propLabel) = 'en')
-    }  
-ORDER BY DESC(?eff) 
-```
+  ?prop wikibase:directClaim ?p .
+  ?prop rdfs:label ?propLabel.
+  FILTER(LANG(?propLabel) = 'en')
+}
+ORDER BY DESC(?eff)
+````
 
 Relevant incoming properties:
 
