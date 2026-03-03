@@ -267,7 +267,7 @@ WHERE
 
 ### Outgoing
 
-On this page (Cf. [on this page](https://github.com/NicoSidler/python_best_practices/blob/40979b35ceaac57c1d47271af61e4fe3f45cd404/documentation/wikidata/wikidata_propertylist.csv)) find the list of properties resulting from this query.
+On this page (Cf. [on this page] https://github.com/NicoSidler/python_best_practices/blob/d69892f850a6d5cafae25e5c1b6f4ae7896eaed2/documentation/wikidata/wikidata_porpertylistoutgoing.md) find the list of properties resulting from this query.
 
 ````
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
@@ -323,6 +323,7 @@ This list is then exported and transformed to a table in order to document the s
 In the column 'notes' of the property table you can add links to the pages where you document the treatement of the corresponding information.
 
 ### Incoming
+On this page (Cf. [on this page] https://github.com/NicoSidler/python_best_practices/blob/d69892f850a6d5cafae25e5c1b6f4ae7896eaed2/documentation/wikidata/wikidata_porpertylistoutgoing.md) find the list of properties resulting from this query.
 
 ````
 ### Incoming (birth year 1950–1980, sociologists)
