@@ -52,7 +52,7 @@ For sociologists, the following properties appear to be an effective way of iden
 
 22174 as of March 03, 2026.
 
-````sparql
+```
 SELECT (COUNT(*) as ?eff)
 WHERE {
 
