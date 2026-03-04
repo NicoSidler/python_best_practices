@@ -86,7 +86,7 @@ WHERE {
 
 ### Actual number of people
 
-23244 las of March 03, 2026.
+23244 as of March 03, 2026.
 
 There is an overlap of approximately 5 individuals.
 
