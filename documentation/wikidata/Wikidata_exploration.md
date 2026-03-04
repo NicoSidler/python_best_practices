@@ -124,7 +124,7 @@ WHERE
             wdt:P569 ?birthDate.
 
       BIND(REPLACE(str(?birthDate), "(.*)([0-9]{4})(.*)", "$2") AS ?year)
-      FILTER(xsd:integer(?year) >= 1950 && xsd:integer(?year) <= 1980)
+      FILTER(xsd:integer(?year) >= 1801 && xsd:integer(?year) <= 1990)
 
       {?item wdt:P106 wd:Q2306091}
       UNION
@@ -151,7 +151,7 @@ WHERE {
         wdt:P569 ?birthDate.
 
   BIND(REPLACE(str(?birthDate), "(.*)([0-9]{4})(.*)", "$2") AS ?year)
-  FILTER(xsd:integer(?year) >= 1950 && xsd:integer(?year) <= 1980)
+  FILTER(xsd:integer(?year) >= 1801 && xsd:integer(?year) <= 1990)
 
   ### Two ways of getting labels
   # SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
@@ -181,7 +181,7 @@ WHERE
             wdt:P569 ?birthDate.
 
       BIND(REPLACE(str(?birthDate), "(.*)([0-9]{4})(.*)", "$2") AS ?year)
-      FILTER(xsd:integer(?year) >= 1950 && xsd:integer(?year) <= 1980)
+      FILTER(xsd:integer(?year) >= 1801 && xsd:integer(?year) <= 1990)
 
       {?item wdt:P106 wd:Q2306091}
       UNION
@@ -208,7 +208,7 @@ WHERE
             wdt:P569 ?birthDate.
 
       BIND(REPLACE(str(?birthDate), "(.*)([0-9]{4})(.*)", "$2") AS ?year)
-      FILTER(xsd:integer(?year) >= 1950 && xsd:integer(?year) <= 1980)
+      FILTER(xsd:integer(?year) >= 1801 && xsd:integer(?year) <= 1990)
 
       {?item wdt:P106 wd:Q2306091}
       UNION
@@ -240,7 +240,7 @@ WHERE
         ?item wdt:P31 wd:Q5; 
               wdt:P569 ?birthDate.
         BIND(REPLACE(str(?birthDate), "(.*)([0-9]{4})(.*)", "$2") AS ?year)
-        FILTER(xsd:integer(?year) > 1780 && xsd:integer(?year) < 1981)# Any instance of a human.
+         FILTER(xsd:integer(?year) >= 1801 && xsd:integer(?year) <= 1990) 
             {?item wdt:P106 wd:Q11063}
             UNION
             {?item wdt:P101 wd:Q333} 
@@ -285,7 +285,7 @@ WHERE {
             wdt:P569 ?birthDate.
 
       BIND(REPLACE(str(?birthDate), "(.*)([0-9]{4})(.*)", "$2") AS ?year)
-      FILTER(xsd:integer(?year) >= 1950 && xsd:integer(?year) <= 1980)
+      FILTER(xsd:integer(?year) >= 1801 && xsd:integer(?year) <= 1990)
 
       {?item wdt:P106 wd:Q2306091}
       UNION
@@ -343,7 +343,7 @@ WHERE {
             wdt:P569 ?birthDate.
 
       BIND(REPLACE(str(?birthDate), "(.*)([0-9]{4})(.*)", "$2") AS ?year)
-      FILTER(xsd:integer(?year) >= 1950 && xsd:integer(?year) <= 1980)
+      FILTER(xsd:integer(?year) >= 1801 && xsd:integer(?year) <= 1991)
 
       { ?item wdt:P106 wd:Q2306091 }
       UNION
