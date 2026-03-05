@@ -6,35 +6,39 @@
 
 ```
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX wd:   <http://www.wikidata.org/entity/>
+PREFIX wdt:  <http://www.wikidata.org/prop/direct/>
+
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-SELECT ?employer ?employerLabel (COUNT(*) as ?eff)
-WHERE
-    {
-    ### subquery adding the distinct clause
-        {
-        SELECT DISTINCT ?item
-        WHERE {
-        ?item wdt:P31 wd:Q5; 
-              wdt:P569 ?birthDate.
-        BIND(REPLACE(str(?birthDate), "(.*)([0-9]{4})(.*)", "$2") AS ?year)
-        FILTER(xsd:integer(?year) > 1780 && xsd:integer(?year) < 1981)# Any instance of a human.
-            {?item wdt:P106 wd:Q11063}
-            UNION
-            {?item wdt:P101 wd:Q333} 
-            UNION
-            {?item wdt:P106 wd:Q169470}
-            UNION
-            {?item wdt:P101 wd:Q413}  
-            }
-        } 
-		
-      ?item wdt:P108 ?employer.
-        ?employer rdfs:label ?employerLabel.
-        FILTER(LANG(?employerLabel) = 'en')
-}  
-GROUP BY ?employer ?employerLabel 
+SELECT ?employer ?employerLabel (COUNT(DISTINCT ?item) AS ?eff)
+WHERE {
+  # --- population (same logic as your first query)
+  {
+    SELECT DISTINCT ?item
+    WHERE {
+      ?item wdt:P31 wd:Q5 ;
+            wdt:P569 ?birthDate .
+
+      BIND(REPLACE(STR(?birthDate), "(.*)([0-9]{4})(.*)", "$2") AS ?year)
+      FILTER(xsd:integer(?year) >= 1801 && xsd:integer(?year) <= 1991)
+
+      { ?item wdt:P106 wd:Q2306091 }   # occupation: sociologist
+      UNION
+      { ?item wdt:P101 wd:Q21201 }     # field of work: sociology
+    }
+  }
+
+  # --- employer (outgoing property)
+  ?item wdt:P108 ?employer .
+
+  # --- English label
+  ?employer rdfs:label ?employerLabel .
+  FILTER(LANG(?employerLabel) = "en")
+}
+GROUP BY ?employer ?employerLabel
 ORDER BY DESC(?eff)
 LIMIT 30
 ```
@@ -44,40 +48,39 @@ LIMIT 30
 * We observe that these are universities and research institutions.
 * Are there also private companies ? 
 
-
-
-| employer                                | employerLabel                           | eff |
-| --------------------------------------- | --------------------------------------- | --- |
-| http://www.wikidata.org/entity/Q49108   | Massachusetts Institute of Technology   | 333 |
-| http://www.wikidata.org/entity/Q13371   | Harvard University                      | 326 |
-| http://www.wikidata.org/entity/Q168756  | University of California, Berkeley      | 277 |
-| http://www.wikidata.org/entity/Q13164   | Lomonosov Moscow State University       | 259 |
-| http://www.wikidata.org/entity/Q161562  | California Institute of Technology      | 223 |
-| http://www.wikidata.org/entity/Q21578   | Princeton University                    | 219 |
-| http://www.wikidata.org/entity/Q35794   | University of Cambridge                 | 216 |
-| http://www.wikidata.org/entity/Q131252  | University of Chicago                   | 201 |
-| http://www.wikidata.org/entity/Q7842    | University of Tokyo                     | 199 |
-| http://www.wikidata.org/entity/Q41506   | Stanford University                     | 186 |
-| http://www.wikidata.org/entity/Q49088   | Columbia University                     | 177 |
-| http://www.wikidata.org/entity/Q49115   | Cornell University                      | 167 |
-| http://www.wikidata.org/entity/Q156598  | Leiden University                       | 166 |
-| http://www.wikidata.org/entity/Q42944   | CERN                                    | 164 |
-| http://www.wikidata.org/entity/Q51985   | Technische Universität Berlin           | 157 |
-| http://www.wikidata.org/entity/Q144488  | University of Warsaw                    | 151 |
-| http://www.wikidata.org/entity/Q152087  | Humboldt-Universität zu Berlin          | 151 |
-| http://www.wikidata.org/entity/Q11942   | ETH Zurich                              | 150 |
-| http://www.wikidata.org/entity/Q157808  | Technical University of Munich          | 142 |
-| http://www.wikidata.org/entity/Q55044   | Ludwig-Maximilians-Universität München  | 142 |
-| http://www.wikidata.org/entity/Q152838  | University of Göttingen                 | 140 |
-| http://www.wikidata.org/entity/Q34433   | University of Oxford                    | 138 |
-| http://www.wikidata.org/entity/Q230492  | University of Michigan                  | 136 |
-| http://www.wikidata.org/entity/Q165980  | University of Vienna                    | 135 |
-| http://www.wikidata.org/entity/Q1810862 | Lebedev Physical Institute              | 130 |
-| http://www.wikidata.org/entity/Q217365  | Bell Labs                               | 128 |
-| http://www.wikidata.org/entity/Q280413  | National Center for Scientific Research | 127 |
-| http://www.wikidata.org/entity/Q457281  | University of Illinois Urbana–Champaign | 126 |
-| http://www.wikidata.org/entity/Q151510  | Heidelberg University                   | 125 |
-| http://www.wikidata.org/entity/Q486156  | University of Oslo                      | 122 |
+| employer                                | employerLabel                                      | eff |
+| --------------------------------------- | -------------------------------------------------- | --- |
+| http://www.wikidata.org/entity/Q280413  | National Center for Scientific Research            | 151 |
+| http://www.wikidata.org/entity/Q144488  | University of Warsaw                               | 147 |
+| http://www.wikidata.org/entity/Q13371   | Harvard University                                 | 144 |
+| http://www.wikidata.org/entity/Q49088   | Columbia University                                | 123 |
+| http://www.wikidata.org/entity/Q131252  | University of Chicago                              | 120 |
+| http://www.wikidata.org/entity/Q174710  | University of California, Los Angeles              | 101 |
+| http://www.wikidata.org/entity/Q174570  | London School of Economics and Political Science   | 98  |
+| http://www.wikidata.org/entity/Q168756  | University of California, Berkeley                 | 95  |
+| http://www.wikidata.org/entity/Q273518  | School for Advanced Studies in the Social Sciences | 89  |
+| http://www.wikidata.org/entity/Q1067935 | Laval University                                   | 85  |
+| http://www.wikidata.org/entity/Q230492  | University of Michigan                             | 82  |
+| http://www.wikidata.org/entity/Q153006  | Freie Universität Berlin                           | 78  |
+| http://www.wikidata.org/entity/Q50662   | Goethe University Frankfurt                        | 72  |
+| http://www.wikidata.org/entity/Q152087  | Humboldt-Universität zu Berlin                     | 71  |
+| http://www.wikidata.org/entity/Q7842    | University of Tokyo                                | 69  |
+| http://www.wikidata.org/entity/Q41506   | Stanford University                                | 66  |
+| http://www.wikidata.org/entity/Q49210   | New York University                                | 63  |
+| http://www.wikidata.org/entity/Q49112   | Yale University                                    | 61  |
+| http://www.wikidata.org/entity/Q165980  | University of Vienna                               | 55  |
+| http://www.wikidata.org/entity/Q392189  | Université de Montréal                             | 55  |
+| http://www.wikidata.org/entity/Q214341  | University of Amsterdam                            | 54  |
+| http://www.wikidata.org/entity/Q309350  | Northwestern University                            | 54  |
+| http://www.wikidata.org/entity/Q49115   | Cornell University                                 | 53  |
+| http://www.wikidata.org/entity/Q34433   | University of Oxford                               | 52  |
+| http://www.wikidata.org/entity/Q156725  | University of Hamburg                              | 51  |
+| http://www.wikidata.org/entity/Q189441  | Jagiellonian University                            | 50  |
+| http://www.wikidata.org/entity/Q49117   | University of Pennsylvania                         | 49  |
+| http://www.wikidata.org/entity/Q859363  | Sciences Po                                        | 49  |
+| http://www.wikidata.org/entity/Q838330  | University of Wisconsin–Madison                    | 49  |
+| http://www.wikidata.org/entity/Q230899  | University of Manchester                           | 48  |
+|                                         |                                                    |     |
 
 
 
