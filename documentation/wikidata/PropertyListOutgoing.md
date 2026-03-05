@@ -10,7 +10,7 @@
 | http://www.wikidata.org/prop/direct/P735   | given name                                                                       | 20351 |       |
 | http://www.wikidata.org/prop/direct/P213   | ISNI                                                                             | 18715 |       |
 | http://www.wikidata.org/prop/direct/P27    | country of citizenship                                                           | 17168 |       |
-| http://www.wikidata.org/prop/direct/P108   | employer                                                                         | 17157 |       |
+| http://www.wikidata.org/prop/direct/P108   | employer                                                                         | 17157 | [see here](https://github.com/NicoSidler/LOD_NicoSidler/blob/6d6f81bb31f6c5b8159f7779174698c9fbb5bbd5/documentation/wikidata/Property_Employers.md)      |
 | http://www.wikidata.org/prop/direct/P69    | educated at                                                                      | 16118 |       |
 | http://www.wikidata.org/prop/direct/P734   | family name                                                                      | 15838 |       |
 | http://www.wikidata.org/prop/direct/P227   | GND ID                                                                           | 15567 |       |
