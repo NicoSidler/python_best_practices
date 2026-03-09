@@ -5,40 +5,32 @@
 
 ```
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX wd: <http://www.wikidata.org/entity/>
-PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX wd:   <http://www.wikidata.org/entity/>
+PREFIX wdt:  <http://www.wikidata.org/prop/direct/>
 
-SELECT ?object ?objectLabel (COUNT(*) as ?eff)
-WHERE
-    {
-    ### subquery adding the distinct clause
-        {
-        SELECT DISTINCT ?item
-        WHERE {
-        ?item wdt:P31 wd:Q5; 
-              wdt:P569 ?birthDate.
-        BIND(REPLACE(str(?birthDate), "(.*)([0-9]{4})(.*)", "$2") AS ?year)
-        FILTER(xsd:integer(?year) > 1780 && xsd:integer(?year) < 1981)# Any instance of a human.
-            {?item wdt:P106 wd:Q11063}
-            UNION
-            {?item wdt:P101 wd:Q333} 
-            UNION
-            {?item wdt:P106 wd:Q169470}
-            UNION
-            {?item wdt:P101 wd:Q413}  
-            }
-        } 
-	
-        ### The property P106 associates occupations to persons
-        # we call here the target variable ?object 
-        # in order to more easily reuse the query. 
-        # ?occupation would be also a good name for the variable
-        ?item wdt:P106 ?object.
-        ?object rdfs:label ?objectLabel.
-        FILTER(LANG(?objectLabel) = 'en')
-}  
-GROUP BY ?object ?objectLabel 
+SELECT ?object ?objectLabel (COUNT(DISTINCT ?item) AS ?eff)
+WHERE {
+  {
+    SELECT DISTINCT ?item
+    WHERE {
+      ?item wdt:P31 wd:Q5 ;
+            wdt:P569 ?birthDate .
+
+      BIND(REPLACE(STR(?birthDate), "(.*)([0-9]{4})(.*)", "$2") AS ?year)
+      FILTER(xsd:integer(?year) >= 1801 && xsd:integer(?year) <= 1991)
+
+      { ?item wdt:P106 wd:Q2306091 }   # occupation: sociologist
+      UNION
+      { ?item wdt:P101 wd:Q21201 }     # field of work: sociology
+    }
+  }
+
+  ?item wdt:P106 ?object .
+  ?object rdfs:label ?objectLabel .
+  FILTER(LANG(?objectLabel) = "en")
+}
+GROUP BY ?object ?objectLabel
 ORDER BY DESC(?eff)
 LIMIT 10
 ```
