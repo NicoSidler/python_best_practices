@@ -1,6 +1,6 @@
 | p                                          | propLabel                                                                        | eff   | notes |
 | ------------------------------------------ | -------------------------------------------------------------------------------- | ----- | ----- |
-| http://www.wikidata.org/prop/direct/P106   | occupation                                                                       | 55838 |       |
+| http://www.wikidata.org/prop/direct/P106   | occupation                                                                       | 55838 |  [see here](https://github.com/NicoSidler/LOD_NicoSidler/blob/7140316fc6bff3136b7a23a810031da34e3dc6fd/documentation/wikidata/Property_occupation.md)     |
 | http://www.wikidata.org/prop/direct/P101   | field of work                                                                    | 32931 |       |
 | http://www.wikidata.org/prop/direct/P569   | date of birth                                                                    | 23830 |       |
 | http://www.wikidata.org/prop/direct/P31    | instance of                                                                      | 23173 |       |
