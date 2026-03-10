@@ -37,15 +37,36 @@ LIMIT 30
 
 ### Most frequent occupations
 
-| object                                  | objectLabel        | eff   |
-| --------------------------------------- | ------------------ | ----- |
-| http://www.wikidata.org/entity/Q169470  | physicist          | 26091 |
-| http://www.wikidata.org/entity/Q1622272 | university teacher | 8094  |
-| http://www.wikidata.org/entity/Q11063   | astronomer         | 6804  |
-| http://www.wikidata.org/entity/Q170790  | mathematician      | 2299  |
-| http://www.wikidata.org/entity/Q1650915 | researcher         | 1403  |
-| http://www.wikidata.org/entity/Q752129  | astrophysicist     | 1064  |
-| http://www.wikidata.org/entity/Q81096   | engineer           | 1029  |
-| http://www.wikidata.org/entity/Q593644  | chemist            | 951   |
-| http://www.wikidata.org/entity/Q901     | scientist          | 869   |
-| http://www.wikidata.org/entity/Q36180   | writer             | 868   |
+|citizenship                           |citizenshipLabel          |eff |
+|--------------------------------------|--------------------------|----|
+|http://www.wikidata.org/entity/Q183   |Germany                   |1759|
+|http://www.wikidata.org/entity/Q30    |United States             |1676|
+|http://www.wikidata.org/entity/Q142   |France                    |1236|
+|http://www.wikidata.org/entity/Q36    |Poland                    |735 |
+|http://www.wikidata.org/entity/Q17    |Japan                     |709 |
+|http://www.wikidata.org/entity/Q38    |Italy                     |640 |
+|http://www.wikidata.org/entity/Q145   |United Kingdom            |476 |
+|http://www.wikidata.org/entity/Q29    |Spain                     |420 |
+|http://www.wikidata.org/entity/Q16    |Canada                    |389 |
+|http://www.wikidata.org/entity/Q15180 |Soviet Union              |360 |
+|http://www.wikidata.org/entity/Q28    |Hungary                   |340 |
+|http://www.wikidata.org/entity/Q159   |Russia                    |284 |
+|http://www.wikidata.org/entity/Q155   |Brazil                    |261 |
+|http://www.wikidata.org/entity/Q29999 |Kingdom of the Netherlands|242 |
+|http://www.wikidata.org/entity/Q215   |Slovenia                  |236 |
+|http://www.wikidata.org/entity/Q20    |Norway                    |215 |
+|http://www.wikidata.org/entity/Q40    |Austria                   |199 |
+|http://www.wikidata.org/entity/Q172579|Kingdom of Italy          |180 |
+|http://www.wikidata.org/entity/Q33946 |Czechoslovakia            |176 |
+|http://www.wikidata.org/entity/Q39    |Switzerland               |173 |
+|http://www.wikidata.org/entity/Q801   |Israel                    |160 |
+|http://www.wikidata.org/entity/Q33    |Finland                   |146 |
+|http://www.wikidata.org/entity/Q414   |Argentina                 |145 |
+|http://www.wikidata.org/entity/Q34    |Sweden                    |134 |
+|http://www.wikidata.org/entity/Q43    |Turkey                    |130 |
+|http://www.wikidata.org/entity/Q188712|Empire of Japan           |127 |
+|http://www.wikidata.org/entity/Q31    |Belgium                   |125 |
+|http://www.wikidata.org/entity/Q218   |Romania                   |117 |
+|http://www.wikidata.org/entity/Q419   |Peru                      |104 |
+|http://www.wikidata.org/entity/Q191   |Estonia                   |104 |
+
