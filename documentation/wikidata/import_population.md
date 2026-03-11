@@ -228,10 +228,10 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 
 SELECT *
 WHERE {
-  GRAPH <https://historian.digital/astronomers/graphs-defs.html#wikidata> {
-  ?item  a wd:Q5;
-        ?p ?o.
-        }
+  GRAPH <https://NicoSidler.github.io/sociologists/graphs-defs.html#wikidata> {
+    ?item a wd:Q5;
+          ?p ?o.
+  }
 }
 ORDER BY ?item ?p
 LIMIT 20
@@ -240,7 +240,7 @@ LIMIT 20
 
 ### Count imported data
 
-Imported: 32677
+Imported: 9972
 
 La différence d'effectif peut s'expliquer par des propriétés doubles.
 
@@ -249,13 +249,12 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 
 SELECT (COUNT(*) as ?number)
 WHERE {
-  GRAPH <https://historian.digital/astronomers/graphs-defs.html#wikidata> {
-  ## deux expressions équivalentes
-  # ?item  rdf:type wd:Q5
-  ?item  a wd:Q5
-        }
-}
-      
+  GRAPH <https://NicoSidler.github.io/sociologists/graphs-defs.html#wikidata> {
+    ## deux expressions équivalentes
+    # ?item rdf:type wd:Q5
+    ?item a wd:Q5
+  }
+} 
 ```
 
 ### Multiple dates
@@ -266,15 +265,16 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 
 SELECT (COUNT(*) as ?number) ?item
 WHERE {
-  GRAPH <https://historian.digital/astronomers/graphs-defs.html#wikidata> {
-  ## deux expressions équivalentes
-  # ?item  rdf:type wd:Q5
-  ?item  a wd:Q5;
-   wdt:P569 ?birthDate.
-        }
+  GRAPH <https://NicoSidler.github.io/sociologists/graphs-defs.html#wikidata> {
+    ## deux expressions équivalentes
+    # ?item rdf:type wd:Q5
+    ?item a wd:Q5;
+          wdt:P569 ?birthDate.
+  }
 }
 GROUP BY ?item
 HAVING (COUNT(*) > 1)
+
 ```
 
 ### Multiple genders
@@ -286,12 +286,12 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT (COUNT(*) as ?number) ?item
 WHERE {
-  GRAPH <https://historian.digital/astronomers/graphs-defs.html#wikidata> {
-  ## deux expressions équivalentes
-  # ?item  rdf:type wd:Q5
-  ?item  a wd:Q5;
-   wdt:P21 ?gender.
-        }
+  GRAPH <https://NicoSidler.github.io/sociologists/graphs-defs.html#wikidata> {
+    ## deux expressions équivalentes
+    # ?item rdf:type wd:Q5
+    ?item a wd:Q5;
+          wdt:P21 ?gender.
+  }
 }
 GROUP BY ?item
 HAVING (COUNT(*) > 1)
@@ -304,15 +304,14 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-
 SELECT (COUNT(*) as ?number) ?item
 WHERE {
-  GRAPH <https://historian.digital/astronomers/graphs-defs.html#wikidata> {
-  ## deux expressions équivalentes
-  # ?item  rdf:type wd:Q5
-  ?item  a wd:Q5;
-    rdfs:label ?label.
-        }
+  GRAPH <https://NicoSidler.github.io/sociologists/graphs-defs.html#wikidata> {
+    ## deux expressions équivalentes
+    # ?item rdf:type wd:Q5
+    ?item a wd:Q5;
+          rdfs:label ?label.
+  }
 }
 GROUP BY ?item
 HAVING (COUNT(*) > 1)
