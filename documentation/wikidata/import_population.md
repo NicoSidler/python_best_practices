@@ -535,6 +535,7 @@ INSERT DATA {
 ```
 
 ### Verify imported triples and add labels to genders
+75207 triples
 
 ```sparql
 ### Number of triples in the graph
@@ -545,7 +546,7 @@ WHERE {
   }
 }
 ```
-
+None
 ```sparql
 ### Number of persons with more than one label : no person
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -562,6 +563,8 @@ HAVING (?n > 1)
 
 ### Explore the gender
 
+
+None
 ```sparql
 ### Number of persons having more than one gender
 PREFIX wd: <http://www.wikidata.org/entity/>
@@ -578,7 +581,6 @@ HAVING (?n > 1)
 ```
 
 ```sparql
-```sparql
 ### Number of persons per gender
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
@@ -593,7 +595,18 @@ GROUP BY ?gen
 #HAVING (?n > 1)
 ```
 
-```
+|gen                                      |n    |
+|-----------------------------------------|-----|
+|http://www.wikidata.org/entity/Q15145779 |1    |
+|http://www.wikidata.org/entity/Q1052281  |9    |
+|http://www.wikidata.org/entity/Q6581072  |5452 |
+|http://www.wikidata.org/entity/Q2449503  |6    |
+|http://www.wikidata.org/entity/Q12964198 |1    |
+|http://www.wikidata.org/entity/Q48270    |3    |
+|http://www.wikidata.org/entity/Q27679766 |1    |
+|http://www.wikidata.org/entity/Q6581097  |13379|
+|http://www.wikidata.org/entity/Q113124952|3    |
+
 
 ```sparql
 ### Number of persons per gender in relation to a period
@@ -611,6 +624,11 @@ WHERE {
 GROUP BY ?gen
 #HAVING (?n > 1)
 ```
+|gen                                      |n    |
+|-----------------------------------------|-----|
+|http://www.wikidata.org/entity/Q6581072  |104  |
+|http://www.wikidata.org/entity/Q6581097  |1075 |
+
 
 ```sparql
 ### Add the label to the gender
@@ -753,7 +771,7 @@ LIMIT 10
 ```
 
 ```sparql
-### Number of persons
+### Number of persons: 19016
 
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
@@ -769,26 +787,26 @@ WHERE {
 ```
 
 ```sparql
-### Personnes avec choix aléatoire de modalités pour variables doubles
-
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
-SELECT ?s (MAX(?label) as ?label) (xsd:integer(MAX(?birthDate)) as ?birthDate)
-       (MAX(?gen) as ?gen) (MAX(?genLabel) AS ?genLabel)
+SELECT ?s
+       (MAX(?label) AS ?oneLabel)
+       (xsd:integer(MAX(?birthDate)) AS ?oneBirthDate)
+       (MAX(?gen) AS ?oneGen)
+       (MAX(?genLabel) AS ?oneGenLabel)
 WHERE {
   GRAPH <https://NicoSidler.github.io/sociologists/graphs-defs.html#wikidata> {
-    ?s wdt:P21 ?gen;
-       rdfs:label ?label;
-       wdt:P569 ?birthDate.
-    ?gen rdfs:label ?genLabel
+    ?s wdt:P21 ?gen ;
+       rdfs:label ?label ;
+       wdt:P569 ?birthDate .
+    ?gen rdfs:label ?genLabel .
   }
 }
 GROUP BY ?s
 LIMIT 10
-
 ```
 
 ```sparql
